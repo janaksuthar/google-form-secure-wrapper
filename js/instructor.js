@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return `wrapper_${timestamp}_${randomStr}`;
     }
 
-    // Save configuration to localStorage
+    // Save configuration to localStorage and create shareable URL with embedded config
     function saveConfiguration(wrapperId, config) {
         try {
             let wrapperLinks = {};
@@ -165,10 +165,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Display the generated result
+    // Display the generated result with embedded configuration
     function displayResult(wrapperId, config) {
         const baseUrl = window.location.origin + window.location.pathname.replace('instructor.html', '');
-        const wrapperUrl = `${baseUrl}wrapper.html?id=${wrapperId}`;
+        
+        // Create URL with embedded configuration for cross-device compatibility
+        const configData = btoa(JSON.stringify({
+            id: wrapperId,
+            googleFormUrl: config.googleFormUrl,
+            allowedViolations: config.allowedViolations,
+            sessionDuration: config.sessionDuration,
+            requireEmail: config.requireEmail,
+            createdAt: config.createdAt
+        }));
+        
+        const wrapperUrl = `${baseUrl}wrapper.html?config=${configData}`;
 
         generatedUrlInput.value = wrapperUrl;
 
@@ -179,7 +190,8 @@ document.addEventListener('DOMContentLoaded', function() {
             `Allowed Violations: ${config.allowedViolations}`,
             config.sessionDuration ? `Session Duration: ${config.sessionDuration} minutes` : 'No time limit',
             config.requireEmail ? 'Email verification required' : 'No email verification',
-            `Created: ${new Date(config.createdAt).toLocaleString()}`
+            `Created: ${new Date(config.createdAt).toLocaleString()}`,
+            `Wrapper ID: ${wrapperId}`
         ];
 
         configItems.forEach(item => {
