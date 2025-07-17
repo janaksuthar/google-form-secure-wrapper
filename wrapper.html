@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Form Access</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="wrapper-body">
+    <!-- Email Collection Modal (if required) -->
+    <div id="emailModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>Student Verification Required</h2>
+            <p>Please enter your email address to access this form:</p>
+            <form id="emailForm">
+                <div class="form-group">
+                    <input type="email" id="studentEmail" placeholder="your.email@example.com" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Continue to Form</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Warning Modal -->
+    <div id="warningModal" class="modal" style="display: none;">
+        <div class="modal-content warning-modal">
+            <h2>⚠️ Security Warning</h2>
+            <p>You have been detected switching tabs or losing focus from this exam.</p>
+            <p><strong>Violations: <span id="modalViolationCount">1</span></strong></p>
+            <p>Additional violations may result in your session being terminated.</p>
+            <button id="acknowledgeWarning" class="btn btn-primary">I Understand</button>
+        </div>
+    </div>
+
+    <!-- Session Locked Modal -->
+    <div id="lockedModal" class="modal" style="display: none;">
+        <div class="modal-content locked-modal">
+            <h2>🔒 Session Terminated</h2>
+            <p>Your session has been terminated due to multiple security violations.</p>
+            <p>Please contact your instructor if you believe this was an error.</p>
+            <div class="violation-summary">
+                <p><strong>Total Violations:</strong> <span id="finalViolationCount"></span></p>
+                <p><strong>Session Duration:</strong> <span id="sessionDuration"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Status Bar -->
+    <div id="statusBar" class="status-bar">
+        <div class="status-left">
+            <span class="status-item">
+                <strong>Violations:</strong> 
+                <span id="violationCount" class="violation-count">0</span>
+                /
+                <span id="maxViolations">3</span>
+            </span>
+        </div>
+        <div class="status-center">
+            <span class="status-item">
+                <strong>Secure Form Access</strong>
+            </span>
+        </div>
+        <div class="status-right">
+            <span id="timerDisplay" class="status-item timer" style="display: none;">
+                <strong>Time Remaining:</strong> 
+                <span id="timeRemaining">--:--</span>
+            </span>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div id="mainContent" class="main-content">
+        <div id="loadingMessage" class="loading-message">
+            <h2>Loading Secure Form...</h2>
+            <p>Please wait while we prepare your form access.</p>
+        </div>
+
+        <div id="errorMessage" class="error-message" style="display: none;">
+            <h2>Access Error</h2>
+            <p id="errorText">Unable to load the form. Please check your link and try again.</p>
+        </div>
+
+        <iframe 
+            id="googleFormFrame" 
+            class="form-iframe" 
+            style="display: none;"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0">
+        </iframe>
+    </div>
+
+    <!-- Hidden elements for tracking -->
+    <div id="hiddenTracker" style="display: none;">
+        <input type="hidden" id="sessionId" value="">
+        <input type="hidden" id="startTime" value="">
+        <input type="hidden" id="configId" value="">
+    </div>
+
+    <script src="js/wrapper.js"></script>
+</body>
+</html>
