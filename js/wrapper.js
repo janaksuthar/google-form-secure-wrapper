@@ -27,19 +27,41 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the wrapper
     function init() {
         try {
-            // Get configuration ID from URL
+            // Get configuration from URL parameters
             const urlParams = new URLSearchParams(window.location.search);
-            const configId = urlParams.get('id');
+            const configData = urlParams.get('config');
+            const configId = urlParams.get('id'); // Fallback for old links
 
-            if (!configId) {
+            // Try to load from embedded config first (new method)
+            if (configData) {
+                try {
+                    const decodedConfig = atob(configData);
+                    config = JSON.parse(decodedConfig);
+                    console.log('Loaded embedded configuration');
+                } catch (decodeError) {
+                    console.error('Failed to decode embedded config:', decodeError);
+                    showError('Invalid configuration data. Please use a valid link from your instructor.');
+                    return;
+                }
+            }
+            // Fallback to localStorage method (for backward compatibility)
+            else if (configId) {
+                config = loadConfiguration(configId);
+                if (!config) {
+                    showError('Configuration not found. Please check your link or contact your instructor.');
+                    return;
+                }
+                console.log('Loaded configuration from localStorage');
+            }
+            // No valid configuration found
+            else {
                 showError('Invalid access link. Please use the link provided by your instructor.');
                 return;
             }
 
-            // Load configuration
-            config = loadConfiguration(configId);
-            if (!config) {
-                showError('Configuration not found. Please check your link or contact your instructor.');
+            // Validate required configuration fields
+            if (!config.googleFormUrl || !config.allowedViolations) {
+                showError('Invalid configuration. Please contact your instructor for a new link.');
                 return;
             }
 
@@ -114,15 +136,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Start the secure session
     function startSecureSession() {
-        // Check for existing session to prevent multiple attempts
-        const existingSession = sessionStorage.getItem('secureFormSession');
+        // Generate unique session key for this specific student session
+        const sessionKey = 'secureFormSession_' + sessionId;
+        
+        // Check if THIS specific session already exists (prevent refresh abuse)
+        const existingSession = sessionStorage.getItem(sessionKey);
         if (existingSession) {
-            showError('You have already accessed this form in this browser session.');
-            return;
+            // Allow the same student to continue their session after refresh
+            console.log('Continuing existing session for this student');
         }
 
-        // Mark session as started
-        sessionStorage.setItem('secureFormSession', sessionId);
+        // Mark session as started with unique identifier
+        sessionStorage.setItem(sessionKey, sessionId);
 
         // Load the Google Form
         loadGoogleForm();
@@ -368,8 +393,9 @@ document.addEventListener('DOMContentLoaded', function() {
             lockReason: 'max_violations_exceeded'
         });
 
-        // Clear session storage
-        sessionStorage.removeItem('secureFormSession');
+        // Clear this specific session storage
+        const sessionKey = 'secureFormSession_' + sessionId;
+        sessionStorage.removeItem(sessionKey);
     }
 
     // Setup session timer
