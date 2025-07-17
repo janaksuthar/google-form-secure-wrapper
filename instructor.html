@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructor Panel - Google Form Secure Wrapper</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <h1>Instructor Panel</h1>
+            <p>Create a secure wrapper for your Google Form</p>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </header>
+
+        <main class="form-container">
+            <form id="wrapperForm" class="wrapper-form">
+                <div class="form-group">
+                    <label for="googleFormUrl">Google Form URL *</label>
+                    <input 
+                        type="url" 
+                        id="googleFormUrl" 
+                        name="googleFormUrl" 
+                        placeholder="https://docs.google.com/forms/d/..." 
+                        required
+                    >
+                    <small class="form-help">Paste the public Google Form link here</small>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="allowedViolations">Allowed Violations</label>
+                        <input 
+                            type="number" 
+                            id="allowedViolations" 
+                            name="allowedViolations" 
+                            min="1" 
+                            max="10" 
+                            value="3"
+                        >
+                        <small class="form-help">Number of violations before locking (default: 3)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sessionDuration">Session Duration (minutes)</label>
+                        <input 
+                            type="number" 
+                            id="sessionDuration" 
+                            name="sessionDuration" 
+                            min="5" 
+                            max="300" 
+                            placeholder="60"
+                        >
+                        <small class="form-help">Optional time limit for the session</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="requireEmail" name="requireEmail">
+                        <span class="checkmark"></span>
+                        Require student email before access
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-large">Generate Wrapper Link</button>
+            </form>
+
+            <div id="result" class="result-section" style="display: none;">
+                <h3>Wrapper Link Generated!</h3>
+                <div class="result-content">
+                    <div class="url-display">
+                        <input type="text" id="generatedUrl" readonly>
+                        <button id="copyBtn" class="btn btn-secondary">Copy</button>
+                    </div>
+                    <div class="result-info">
+                        <p><strong>Configuration:</strong></p>
+                        <ul id="configSummary"></ul>
+                        <p class="warning-text">Share this link with your students. They will only be able to access the form through this secure wrapper.</p>
+                    </div>
+                </div>
+                <button id="createAnother" class="btn btn-outline">Create Another Wrapper</button>
+            </div>
+
+            <div id="error" class="error-message" style="display: none;"></div>
+        </main>
+
+        <footer class="footer">
+            <p><a href="admin.html">View Analytics Dashboard</a></p>
+        </footer>
+    </div>
+
+    <script src="js/instructor.js"></script>
+</body>
+</html>
