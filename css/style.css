@@ -1,0 +1,518 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #1a1a1a;
+    background-color: #ffffff;
+    font-size: 16px;
+}
+
+/* Container and Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin-bottom: 0.5em;
+    color: #000000;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    color: #4a4a4a;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    font-family: inherit;
+}
+
+.btn-primary {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #333333;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: #f5f5f5;
+    color: #000000;
+    border: 1px solid #e0e0e0;
+}
+
+.btn-secondary:hover {
+    background-color: #e8e8e8;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: #000000;
+    border: 2px solid #000000;
+}
+
+.btn-outline:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.btn-large {
+    padding: 16px 32px;
+    font-size: 18px;
+}
+
+/* Header Styles */
+.hero-section {
+    text-align: center;
+    padding: 80px 0 60px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #666666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.page-header {
+    text-align: center;
+    padding: 60px 0 40px;
+    position: relative;
+}
+
+.back-link {
+    position: absolute;
+    left: 0;
+    top: 60px;
+    color: #666666;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    color: #000000;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding-bottom: 60px;
+}
+
+/* Feature Grid */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+.feature-card {
+    background: #f8f9fa;
+    padding: 40px 30px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.feature-card h3 {
+    margin-bottom: 16px;
+}
+
+.feature-list {
+    list-style: none;
+    text-align: left;
+    margin: 20px 0;
+}
+
+.feature-list li {
+    padding: 8px 0;
+    color: #4a4a4a;
+}
+
+.feature-list li:before {
+    content: "✓ ";
+    color: #000000;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+/* CTA Section */
+.cta-section {
+    text-align: center;
+    padding: 60px 0;
+    background: #f8f9fa;
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+
+/* Form Styles */
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.wrapper-form {
+    background: #f8f9fa;
+    padding: 40px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #000000;
+}
+
+input[type="text"],
+input[type="url"],
+input[type="email"],
+input[type="number"] {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: #000000;
+}
+
+.form-help {
+    display: block;
+    margin-top: 4px;
+    font-size: 14px;
+    color: #666666;
+}
+
+/* Checkbox Styles */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 12px;
+    width: 18px;
+    height: 18px;
+}
+
+/* Result Section */
+.result-section {
+    background: #f0f9ff;
+    padding: 30px;
+    border-radius: 12px;
+    border: 2px solid #e0f2fe;
+    margin-bottom: 20px;
+}
+
+.result-section h3 {
+    color: #0369a1;
+    margin-bottom: 20px;
+}
+
+.url-display {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.url-display input {
+    flex: 1;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+}
+
+.result-info {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.warning-text {
+    color: #dc2626;
+    font-weight: 500;
+    margin-top: 12px;
+}
+
+/* Error Messages */
+.error-message {
+    background: #fef2f2;
+    color: #dc2626;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #fecaca;
+    margin-bottom: 20px;
+}
+
+/* Wrapper Page Styles */
+.wrapper-body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.status-bar {
+    background: #000000;
+    color: #ffffff;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.violation-count {
+    color: #ef4444;
+    font-weight: bold;
+}
+
+.timer {
+    color: #fbbf24;
+}
+
+.main-content {
+    margin-top: 60px;
+    height: calc(100vh - 60px);
+    position: relative;
+}
+
+.form-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.loading-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.modal-content {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.warning-modal {
+    border-left: 5px solid #f59e0b;
+}
+
+.locked-modal {
+    border-left: 5px solid #ef4444;
+}
+
+.violation-summary {
+    background: #f3f4f6;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 40px 0;
+    color: #666666;
+    border-top: 1px solid #e0e0e0;
+    margin-top: auto;
+}
+
+.footer a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 16px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-section {
+        padding: 60px 0 40px;
+    }
+    
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .feature-card {
+        padding: 30px 20px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .wrapper-form {
+        padding: 30px 20px;
+    }
+    
+    .url-display {
+        flex-direction: column;
+    }
+    
+    .status-bar {
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px 16px;
+    }
+    
+    .main-content {
+        margin-top: 80px;
+        height: calc(100vh - 80px);
+    }
+    
+    .modal-content {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn {
+        width: 100%;
+        margin-bottom: 12px;
+    }
+    
+    .status-bar {
+        font-size: 12px;
+    }
+    
+    .back-link {
+        position: static;
+        display: block;
+        margin-bottom: 20px;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus styles for accessibility */
+button:focus,
+input:focus,
+a:focus {
+    outline: 2px solid #000000;
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .status-bar,
+    .modal {
+        display: none !important;
+    }
+}
